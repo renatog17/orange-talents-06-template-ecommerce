@@ -7,6 +7,7 @@ import javax.validation.constraints.Size;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import br.com.renato.mercadolivre.config.validacao.UniqueValue;
 import br.com.renato.mercadolivre.model.Usuario;
 import br.com.renato.mercadolivre.model.util.SenhaLimpa;
 
@@ -14,6 +15,7 @@ public class UsuarioForm {
 
 	@NotBlank
 	@Email
+	@UniqueValue(domainClass = Usuario.class, fieldName = "login")
 	private String login;
 	@NotBlank
 	@Size(min = 6)
