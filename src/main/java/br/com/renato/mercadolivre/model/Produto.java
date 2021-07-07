@@ -33,40 +33,5 @@ public class Produto {
 		this.qtdDisponivel = qtdDisponivel;
 		this.descricao = descricao;
 		this.categoria = categoria;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public Double getValor() {
-		return valor;
-	}
-
-	public Integer getQtdDisponivel() {
-		return qtdDisponivel;
-	}
-
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	public LocalDate getInstanteCadastro() {
-		return instanteCadastro;
-	}
-
-	public Set<Caracteristica> getCaracteristicas() {
-		return caracteristicas;
-	}
-	
-	
-	
+	}	
 }
