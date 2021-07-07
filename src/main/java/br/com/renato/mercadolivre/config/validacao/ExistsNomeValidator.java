@@ -25,6 +25,11 @@ public class ExistsNomeValidator implements ConstraintValidator<ExistsNome, Obje
 	
 	@Override
 	public boolean isValid(Object value, ConstraintValidatorContext context) {
+		String v = (String) value;
+		if (v==null || v.length()==0) {
+			System.out.println("entrou");
+			return true;
+		}
 		Query query = manager.createQuery("select 1 from "+klass.getName()+" where "+domainAttribute+"=:value");
 		query.setParameter("value", value);
 		List<?> list = query.getResultList();

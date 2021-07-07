@@ -4,6 +4,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 import br.com.renato.mercadolivre.config.validacao.ExistsNome;
 import br.com.renato.mercadolivre.config.validacao.UniqueValue;
@@ -19,9 +20,8 @@ public class CategoriaForm {
 	String nomeCategoriaMae;
 
 	public Categoria toModel(CategoriaRepository categoriaRepository){
-		System.out.println(this.nomeCategoriaMae + "aqui");
 		Categoria categoria = new Categoria(this.nome);
-		if (this.nomeCategoriaMae != null) {
+		if (this.nomeCategoriaMae != null && this.nomeCategoriaMae.length()>0) {
 			Optional<Categoria> categoriaMae = categoriaRepository.findByNome(this.nomeCategoriaMae);
 			categoria.setCategoriaMae(categoriaMae.get());
 		}

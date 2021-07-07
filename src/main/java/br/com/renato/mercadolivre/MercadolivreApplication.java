@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
-(exclude = { SecurityAutoConfiguration.class })
+//(exclude = { SecurityAutoConfiguration.class })
 public class MercadolivreApplication {
 
 	public static void main(String[] args) {
