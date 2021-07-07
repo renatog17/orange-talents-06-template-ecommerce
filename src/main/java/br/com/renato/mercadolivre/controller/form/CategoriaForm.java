@@ -6,7 +6,7 @@ import java.util.Optional;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 
-import br.com.renato.mercadolivre.config.validacao.ExistsNome;
+import br.com.renato.mercadolivre.config.validacao.Exists;
 import br.com.renato.mercadolivre.config.validacao.UniqueValue;
 import br.com.renato.mercadolivre.model.Categoria;
 import br.com.renato.mercadolivre.repository.CategoriaRepository;
@@ -16,7 +16,7 @@ public class CategoriaForm {
 	@NotBlank
 	@UniqueValue(domainClass = Categoria.class, fieldName = "nome")
 	String nome;
-	@ExistsNome(domainClass = Categoria.class, fieldName = "nome")
+	@Exists(domainClass = Categoria.class, fieldName = "nome")
 	String nomeCategoriaMae;
 
 	public Categoria toModel(CategoriaRepository categoriaRepository){

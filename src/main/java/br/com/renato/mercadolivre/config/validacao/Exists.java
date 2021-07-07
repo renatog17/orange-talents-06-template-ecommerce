@@ -8,10 +8,10 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-@Constraint(validatedBy = { ExistsNomeValidator.class })
+@Constraint(validatedBy = { ExistsValidator.class })
 @Target({ ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ExistsNome {
+public @interface Exists {
 
 	String message() default "";
 

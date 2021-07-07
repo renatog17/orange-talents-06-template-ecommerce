@@ -14,11 +14,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.stereotype.Component;
 
 import br.com.renato.mercadolivre.repository.UsuarioRepository;
 
 @EnableWebSecurity
 @Configuration
+@Component
 public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 
 	@Autowired

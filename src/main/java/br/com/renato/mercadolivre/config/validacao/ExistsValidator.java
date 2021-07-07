@@ -11,14 +11,14 @@ import javax.validation.ConstraintValidatorContext;
 
 import org.springframework.util.Assert;
 
-public class ExistsNomeValidator implements ConstraintValidator<ExistsNome, Object>{
+public class ExistsValidator implements ConstraintValidator<Exists, Object>{
 
 	private String domainAttribute;
 	private Class<?> klass;
 	@PersistenceContext
 	private EntityManager manager;
 	
-	public void initialize(ExistsNome params) {
+	public void initialize(Exists params) {
 		domainAttribute = params.fieldName();
 		klass = params.domainClass();
 	}
