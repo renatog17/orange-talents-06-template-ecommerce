@@ -1,10 +1,8 @@
 package br.com.renato.mercadolivre.controller.form;
 
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 
 import br.com.renato.mercadolivre.config.validacao.Exists;
 import br.com.renato.mercadolivre.config.validacao.UniqueValue;
