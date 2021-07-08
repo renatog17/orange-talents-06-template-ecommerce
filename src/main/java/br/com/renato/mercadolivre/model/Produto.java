@@ -49,7 +49,8 @@ public class Produto {
 	private Set<Caracteristica> caracteristicas = new HashSet<>();
 	@OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
 	private Set<ImagemProduto> imagens = new HashSet<>();
-	
+	@OneToMany
+	private List<Opiniao> opinioes = new ArrayList<>();
 
 	public Produto() {
 		
