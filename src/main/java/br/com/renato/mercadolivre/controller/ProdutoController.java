@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,13 +19,16 @@ import org.springframework.web.server.ResponseStatusException;
 
 import br.com.renato.mercadolivre.config.security.TokenService;
 import br.com.renato.mercadolivre.controller.form.ImagemForm;
+import br.com.renato.mercadolivre.controller.form.OpiniaoForm;
 import br.com.renato.mercadolivre.controller.form.ProdutoForm;
 import br.com.renato.mercadolivre.controller.form.UploaderFake;
 import br.com.renato.mercadolivre.model.Caracteristica;
+import br.com.renato.mercadolivre.model.Opiniao;
 import br.com.renato.mercadolivre.model.Produto;
 import br.com.renato.mercadolivre.model.Usuario;
 import br.com.renato.mercadolivre.repository.CaracteristicaRepository;
 import br.com.renato.mercadolivre.repository.CategoriaRepository;
+import br.com.renato.mercadolivre.repository.OpiniaoRepository;
 import br.com.renato.mercadolivre.repository.ProdutoRepository;
 import br.com.renato.mercadolivre.repository.UsuarioRepository;
 
@@ -43,6 +47,8 @@ public class ProdutoController {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	@Autowired
+	private OpiniaoRepository opiniaoRepository;
+	@Autowired
 	private UploaderFake uploaderFake;
 
 	@PostMapping
@@ -59,7 +65,7 @@ public class ProdutoController {
 
 	@PostMapping(value = "/{id}/imagens")
 	@Transactional
-	public ResponseEntity adicionaImagens(@PathVariable Long id, @Valid ImagemForm imagemForm,
+	public ResponseEntity<?> adicionaImagens(@PathVariable Long id, @Valid ImagemForm imagemForm,
 			@RequestHeader("Authorization") String token) {
 		Set<String> links = uploaderFake.envia(imagemForm.getImagens());
 
@@ -74,4 +80,15 @@ public class ProdutoController {
 		produtoRepository.save(produto);
 		return ResponseEntity.ok().build();
 	}
+	
+	@PostMapping(value = "/{id}/opinioes")
+	public ResponseEntity<?> adicionaOpinioes(@RequestBody @Valid OpiniaoForm opiniaoForm,
+			@PathVariable Long id, @AuthenticationPrincipal Usuario user){
+		Produto produto = produtoRepository.findById(id).get();
+		Opiniao opiniao = opiniaoForm.toModel(user, produto);
+		opiniaoRepository.save(opiniao);
+		return null;
+	}
+	
+	
 }
