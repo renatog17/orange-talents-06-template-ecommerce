@@ -15,6 +15,7 @@ import br.com.renato.mercadolivre.config.validacao.Exists;
 import br.com.renato.mercadolivre.model.Caracteristica;
 import br.com.renato.mercadolivre.model.Categoria;
 import br.com.renato.mercadolivre.model.Produto;
+import br.com.renato.mercadolivre.model.Usuario;
 import br.com.renato.mercadolivre.repository.CategoriaRepository;
 
 public class ProdutoForm {
@@ -65,11 +66,11 @@ public class ProdutoForm {
 		return caracteristicas;
 	}
 
-	public Produto toModelProduto(CategoriaRepository categoriaRepository) {
+	public Produto toModelProduto(CategoriaRepository categoriaRepository, Usuario usuario) {
 		Optional<Categoria> categoria = categoriaRepository.findByNome(this.categoria);
 	
 		if (categoria.isPresent()) {
-			Produto produto = new Produto(this.nome, this.valor, this.qtdDisponivel, this.descricao, categoria.get());
+			Produto produto = new Produto(this.nome, this.valor, this.qtdDisponivel, this.descricao, categoria.get(), usuario);
 			return produto;
 		}
 		return null;
