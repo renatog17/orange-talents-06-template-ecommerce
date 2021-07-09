@@ -33,4 +33,12 @@ public class Pergunta {
 		this.usuario = usuario;
 	}
 
+	public Usuario getPerguntador() {
+		return usuario;
+	}
+
+	public Usuario getDonoProduto() {
+		return produto.getUsuario();
+	}
+
 }
