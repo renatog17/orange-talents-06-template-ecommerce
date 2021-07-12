@@ -26,6 +26,11 @@ public class Pergunta {
 	@ManyToOne
 	private Usuario usuario;
 
+	@Deprecated
+	public Pergunta() {
+		super();
+	}
+
 	public Pergunta(@NotBlank String titulo, @NotNull Produto produto, @NotNull Usuario usuario) {
 		super();
 		this.titulo = titulo;
@@ -39,6 +44,10 @@ public class Pergunta {
 
 	public Usuario getDonoProduto() {
 		return produto.getUsuario();
+	}
+
+	public String getTitulo() {
+		return titulo;
 	}
 
 }

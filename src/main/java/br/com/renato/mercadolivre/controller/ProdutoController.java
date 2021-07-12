@@ -9,15 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import br.com.renato.mercadolivre.config.security.TokenService;
+import br.com.renato.mercadolivre.controller.dto.ProdutoDto;
 import br.com.renato.mercadolivre.controller.form.ImagemForm;
 import br.com.renato.mercadolivre.controller.form.OpiniaoForm;
 import br.com.renato.mercadolivre.controller.form.ProdutoForm;
@@ -50,7 +53,7 @@ public class ProdutoController {
 	private OpiniaoRepository opiniaoRepository;
 	@Autowired
 	private UploaderFake uploaderFake;
-
+	
 	@PostMapping
 	public ResponseEntity<?> cadastrar(@RequestBody @Valid ProdutoForm produtoForm,
 			@RequestHeader("Authorization") String token) {
@@ -63,6 +66,13 @@ public class ProdutoController {
 		return ResponseEntity.ok().build();
 	}
 
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<ProdutoDto> buscar(@PathVariable Long id){
+		Produto produto = produtoRepository.findById(id).get();
+		ProdutoDto produtoDto = new ProdutoDto(produto);
+		return ResponseEntity.ok(produtoDto);
+	}
+	
 	@PostMapping(value = "/{id}/imagens")
 	@Transactional
 	public ResponseEntity<?> adicionaImagens(@PathVariable Long id, @Valid ImagemForm imagemForm,

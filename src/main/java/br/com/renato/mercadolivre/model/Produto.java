@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -49,8 +50,10 @@ public class Produto {
 	private Set<Caracteristica> caracteristicas = new HashSet<>();
 	@OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
 	private Set<ImagemProduto> imagens = new HashSet<>();
-	@OneToMany
+	@OneToMany(mappedBy = "produto")
 	private List<Opiniao> opinioes = new ArrayList<>();
+	@OneToMany(mappedBy = "produto")
+	private List<Pergunta> perguntas = new ArrayList<>();
 
 	public Produto() {
 		
@@ -78,6 +81,51 @@ public class Produto {
 		this.imagens.addAll(imagens);
 	}
 
+	public String getNome() {
+		return nome;
+	}
+
+	public Double getValor() {
+		return valor;
+	}
+
+	public Integer getQtdDisponivel() {
+		return qtdDisponivel;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public LocalDate getInstanteCadastro() {
+		return instanteCadastro;
+	}
+
+	public Set<Caracteristica> getCaracteristicas() {
+		return caracteristicas;
+	}
+
+	public Set<ImagemProduto> getImagens() {
+		return imagens;
+	}
+
+	public List<Opiniao> getOpinioes() {
+		return opinioes;
+	}
+
+	public List<Pergunta> getPerguntas() {
+		return perguntas;
+	}
 	
-	
+	public Double mediaOpiniao() {
+		Double somaNota = 0.0;
+		for (Opiniao opiniao : opinioes) {
+			somaNota = somaNota + opiniao.getNota();
+		}
+		return somaNota/this.opinioes.size();
+	}
 }
