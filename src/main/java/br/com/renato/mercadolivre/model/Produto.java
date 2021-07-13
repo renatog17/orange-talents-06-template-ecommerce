@@ -128,4 +128,8 @@ public class Produto {
 		}
 		return somaNota/this.opinioes.size();
 	}
+	
+	public void abaterQuantidade(Integer quantidade) {
+		this.qtdDisponivel = this.qtdDisponivel-quantidade; 
+	}
 }
